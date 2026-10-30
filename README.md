@@ -1,16 +1,29 @@
-# 🛍️ Customer Behavior Analysis
-
-> **End-to-End Data Analytics Pipeline** | Python · PostgreSQL · Power BI
-
----
-
 <div align="center">
 
-![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-18.6-336791?logo=postgresql&logoColor=white)
-![Power BI](https://img.shields.io/badge/Power_BI-Dashboard-F2C811?logo=powerbi&logoColor=black)
-![Pandas](https://img.shields.io/badge/Pandas-2.x-150458?logo=pandas&logoColor=white)
-![Dataset](https://img.shields.io/badge/Dataset-3%2C900_rows_%C3%97_18_cols-brightgreen)
+# CustomerPulse Analytics
+### Customer Behavior Analysis — End-to-End Data Analytics Pipeline
+
+<br/>
+
+[![Python](https://img.shields.io/badge/Python-3.13-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Pandas](https://img.shields.io/badge/Pandas-2.x-150458?style=for-the-badge&logo=pandas&logoColor=white)](https://pandas.pydata.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-18.6-336791?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Power BI](https://img.shields.io/badge/Power_BI-Dashboard-F2C811?style=for-the-badge&logo=powerbi&logoColor=black)](https://powerbi.microsoft.com/)
+[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?style=for-the-badge&logo=jupyter&logoColor=white)](https://jupyter.org/)
+
+<br/>
+
+> **An end-to-end analytics project** that transforms raw retail transaction data into actionable business insights — through Python-based data cleaning, PostgreSQL storage, and an interactive Power BI dashboard.
+
+<br/>
+
+| Metric | Value |
+|--------|-------|
+| 👥 Customers Analysed | **3,900** |
+| 💰 Avg. Purchase Amount | **\$59.76** |
+| ⭐ Avg. Review Rating | **3.75 / 5** |
+| 🗄️ Database | **PostgreSQL 18.6** |
+| 📊 Dashboard Tool | **Power BI** |
 
 </div>
 
@@ -19,98 +32,118 @@
 ## 📋 Table of Contents
 
 1. [Project Overview](#1-project-overview)
-2. [Tech Stack](#2-tech-stack)
-3. [Dataset Description](#3-dataset-description)
-4. [Analysis Design](#4-analysis-design)
-5. [Code & Outputs](#5-code--outputs)
-   - [5.1 Data Loading](#51-data-loading)
-   - [5.2 Data Preview — `df.head()`](#52-data-preview--dfhead)
-   - [5.3 Dataset Info — `df.info()`](#53-dataset-info--dfinfo)
-   - [5.4 Summary Statistics — `df.describe()`](#54-summary-statistics--dfdescribe)
-   - [5.5 Missing Values Check](#55-missing-values-check)
-   - [5.6 Handling Missing Values](#56-handling-missing-values)
-   - [5.7 Column Cleaning](#57-column-cleaning)
-   - [5.8 Feature Engineering — Age Group](#58-feature-engineering--age-group)
-   - [5.9 Feature Engineering — Purchase Frequency Days](#59-feature-engineering--purchase-frequency-days)
-   - [5.10 Duplicate Column Detection & Drop](#510-duplicate-column-detection--drop)
-   - [5.11 Final Column List](#511-final-column-list)
-   - [5.12 Database Export — PostgreSQL](#512-database-export--postgresql)
-6. [Dashboard](#6-dashboard)
-7. [Dashboard Output Tables](#7-dashboard-output-tables)
-8. [Key Insights](#8-key-insights)
-9. [Pipeline Architecture](#9-pipeline-architecture)
+2. [Project Highlights](#2-project-highlights)
+3. [Technology Stack](#3-technology-stack)
+4. [Dataset Description](#4-dataset-description)
+5. [Project Workflow](#5-project-workflow)
+6. [Data Cleaning & Preprocessing](#6-data-cleaning--preprocessing)
+   - [6.1 Data Loading](#61-data-loading)
+   - [6.2 Data Preview — `df.head()`](#62-data-preview--dfhead)
+   - [6.3 Dataset Info — `df.info()`](#63-dataset-info--dfinfo)
+   - [6.4 Summary Statistics — `df.describe()`](#64-summary-statistics--dfdescribe)
+   - [6.5 Missing Values Check](#65-missing-values-check)
+   - [6.6 Handling Missing Values](#66-handling-missing-values)
+   - [6.7 Column Standardisation](#67-column-standardisation)
+7. [Feature Engineering](#7-feature-engineering)
+   - [7.1 Age Group Segmentation](#71-age-group-segmentation)
+   - [7.2 Purchase Frequency Days](#72-purchase-frequency-days)
+   - [7.3 Duplicate Column Detection & Drop](#73-duplicate-column-detection--drop)
+   - [7.4 Final Column List](#74-final-column-list)
+8. [PostgreSQL Database Integration](#8-postgresql-database-integration)
+9. [Power BI Dashboard](#9-power-bi-dashboard)
+   - [9.1 Dashboard Screenshots](#91-dashboard-screenshots)
+   - [9.2 KPI Cards](#92-kpi-cards)
+   - [9.3 Revenue & Sales by Category](#93-revenue--sales-by-category)
+   - [9.4 Revenue & Sales by Age Group](#94-revenue--sales-by-age-group)
+   - [9.5 Subscription Distribution](#95-subscription-distribution)
+   - [9.6 Interactive Slicers](#96-interactive-slicers)
+   - [9.7 Other Notable EDA Metrics](#97-other-notable-eda-metrics)
+10. [Key Business Insights](#10-key-business-insights)
+11. [Pipeline Architecture](#11-pipeline-architecture)
+12. [Project Structure](#12-project-structure)
+13. [Installation & Setup](#13-installation--setup)
+14. [How to Run the Project](#14-how-to-run-the-project)
+15. [Conclusion](#15-conclusion)
+16. [Future Improvements](#16-future-improvements)
 
 ---
 
 ## 1. Project Overview
 
-This project delivers a **structured end-to-end data analytics pipeline** to analyze customer shopping behavior across demographics, product categories, and purchase patterns. Raw transactional data is cleaned, enriched with engineered features, stored in PostgreSQL, and visualized through an interactive Power BI dashboard.
+**CustomerPulse Analytics** is a structured, end-to-end data analytics project built to understand customer shopping behaviour across demographics, product categories, and purchase frequencies. It processes raw retail transaction data through a full analytics pipeline — cleaning, feature engineering, database export, and dashboard visualisation — to surface actionable business intelligence.
 
-**Business Objectives:**
+The dataset contains **3,900 customer transaction records** from a US retail environment spanning clothing, accessories, footwear, and outerwear categories.
 
-| # | Objective |
-|---|-----------|
-| 1 | Profile customer demographics — age, gender, and location distribution |
-| 2 | Analyze revenue and sales volume by product category |
-| 3 | Measure the impact of discounts, promo codes, and subscriptions |
-| 4 | Segment customers by age group for targeted marketing |
-| 5 | Export clean data to PostgreSQL for scalable, queryable storage |
-| 6 | Visualize KPIs through an interactive, filterable Power BI dashboard |
+**Business Problem:**
+Retail businesses often have rich transaction data but lack visibility into *who* their customers are, *what* they buy, *how often* they shop, and *which channels and categories* drive the most revenue. This project addresses those questions through a reproducible, well-documented analytics workflow.
 
 ---
 
-## 2. Tech Stack
+## 2. Project Highlights
 
-| Layer | Tool | Purpose |
-|-------|------|---------|
-| **Language** | Python 3.13 | Data processing & feature engineering |
-| **IDE** | Jupyter Notebook | Interactive analysis environment |
-| **Data Library** | Pandas 2.x | DataFrame manipulation |
-| **Database** | PostgreSQL 18.6 | Persistent cleaned data storage |
-| **DB Connector** | SQLAlchemy + psycopg2 | Python ↔ PostgreSQL bridge |
-| **Visualization** | Power BI Desktop | Interactive business dashboard |
-| **Dataset** | CSV (local file) | Source transactional data |
+- ✅ **Full pipeline from raw CSV to interactive Power BI dashboard**
+- ✅ **3,900 customer records** cleaned, engineered, and stored in PostgreSQL
+- ✅ **2 engineered features** — `age_group` (quartile segmentation) and `purchase_frequency_days` (numeric mapping)
+- ✅ **Null imputation** using per-category median (37 missing `Review Rating` values)
+- ✅ **Redundant column detection** — `promo_code_used` confirmed 100% identical to `discount_applied` and dropped
+- ✅ **PostgreSQL 18.6 integration** via SQLAlchemy + psycopg2
+- ✅ **Interactive Power BI dashboard** with 4 slicers, 3 KPI cards, and 5 charts
+- ✅ **10 key business insights** with actionable implications
 
 ---
 
-## 3. Dataset Description
+## 3. Technology Stack
+
+| Layer | Tool / Library | Version | Purpose |
+|-------|---------------|---------|---------|
+| Language | Python | 3.13 | Core data processing and scripting |
+| Environment | Jupyter Notebook | — | Interactive, reproducible analysis |
+| Data Processing | Pandas | 2.x | DataFrame manipulation and transformation |
+| Database | PostgreSQL | 18.6 | Persistent, queryable cleaned data storage |
+| DB Connector | SQLAlchemy + psycopg2 | 2.1.4 / 2.9.13 | Python ↔ PostgreSQL bridge |
+| Visualisation | Power BI Desktop | — | Interactive KPI dashboard |
+| Data Source | CSV (local file) | — | Raw transactional source data |
+
+---
+
+## 4. Dataset Description
 
 **File:** `customer_shopping_behavior.csv`
 **Shape:** 3,900 rows × 18 columns (original) → 19 columns (after feature engineering)
 
-### 3.1 Raw Columns
+### 4.1 Raw Columns
 
-| # | Column | dtype | Range / Values | Notes |
-|---|--------|-------|----------------|-------|
-| 0 | `Customer ID` | int64 | 1 – 3,900 | Unique identifier |
+| # | Column | dtype | Range / Unique Values | Notes |
+|---|--------|-------|-----------------------|-------|
+| 0 | `Customer ID` | int64 | 1 – 3,900 | Unique customer identifier |
 | 1 | `Age` | int64 | 18 – 70 | Customer age |
-| 2 | `Gender` | object | Male / Female | 2,652 Male, 1,248 Female |
-| 3 | `Item Purchased` | object | 25 unique items | Top: Blouse (171) |
-| 4 | `Category` | object | 4 categories | Clothing, Accessories, Footwear, Outerwear |
-| 5 | `Purchase Amount (USD)` | int64 | 20 – 100 | Transaction value |
-| 6 | `Location` | object | 50 US states | Top: Montana |
+| 2 | `Gender` | object | Male / Female | 2,652 Male · 1,248 Female |
+| 3 | `Item Purchased` | object | 25 unique items | Most frequent: Blouse (171) |
+| 4 | `Category` | object | 4 categories | Clothing · Accessories · Footwear · Outerwear |
+| 5 | `Purchase Amount (USD)` | int64 | \$20 – \$100 | Transaction value |
+| 6 | `Location` | object | 50 US states | Top state: Montana (96 orders) |
 | 7 | `Size` | object | S, M, L, XL | Garment size |
-| 8 | `Color` | object | 25 colors | Item color |
-| 9 | `Season` | object | Spring, Summer, Fall, Winter | Purchase season |
-| 10 | `Review Rating` | float64 | 2.5 – 5.0 | **37 nulls** (imputed) |
+| 8 | `Color` | object | 25 unique colors | Item color |
+| 9 | `Season` | object | Spring · Summer · Fall · Winter | Season of purchase |
+| 10 | `Review Rating` | float64 | 2.5 – 5.0 | ⚠️ **37 null values** — imputed |
 | 11 | `Subscription Status` | object | Yes / No | 27% subscribed |
 | 12 | `Shipping Type` | object | 6 types | Free Shipping, Express, etc. |
-| 13 | `Discount Applied` | object | Yes / No | |
-| 14 | `Promo Code Used` | object | Yes / No | **Identical to col 13 — dropped** |
+| 13 | `Discount Applied` | object | Yes / No | — |
+| 14 | `Promo Code Used` | object | Yes / No | ⚠️ **100% identical to col 13 — dropped** |
 | 15 | `Previous Purchases` | int64 | 1 – 50 | Historical order count |
 | 16 | `Payment Method` | object | PayPal, Credit Card, Cash, Venmo, etc. | Top: PayPal (677) |
-| 17 | `Frequency of Purchases` | object | Weekly, Monthly, Quarterly, etc. | Purchase cadence |
+| 17 | `Frequency of Purchases` | object | Weekly, Monthly, Quarterly, etc. | Purchase cadence string |
 
-### 3.2 Engineered Columns
+### 4.2 Engineered Columns (Added During Processing)
 
-| Column | Logic | Values |
-|--------|-------|--------|
-| `age_group` | `pd.qcut(age, q=4)` — quartile bins | Young Adult · Adult · Middle Aged · Senior |
-| `purchase_frequency_days` | Mapped from `frequency_of_purchases` string | 7, 14, 30, 90, 365 days |
+| Column | Method | Possible Values |
+|--------|--------|-----------------|
+| `age_group` | `pd.qcut(age, q=4)` — quartile binning | Young Adult · Adult · Middle Aged · Senior |
+| `purchase_frequency_days` | Dictionary mapping from `frequency_of_purchases` | 7, 14, 30, 90, 365 (integer, days) |
 
 ---
 
-## 4. Analysis Design
+## 5. Project Workflow
 
 ```mermaid
 flowchart TD
@@ -119,26 +152,24 @@ flowchart TD
     C --> D["⚙️ Feature Engineering\nage_group · purchase_frequency_days"]
     D --> E["🗄️ PostgreSQL Export\nSQLAlchemy · psycopg2"]
     E --> F["📊 Power BI Dashboard\nKPIs · Charts · Slicers"]
-    F --> G["💡 Insights & Decisions"]
+    F --> G["💡 Business Insights & Decisions"]
 ```
-
-### Pipeline Stages Summary
 
 | Stage | Tool / Method | Key Actions |
 |-------|--------------|-------------|
 | **EDA** | Pandas | `df.head()`, `df.info()`, `df.describe(include='all')`, `df.isnull().sum()` |
-| **Cleaning** | Pandas `groupby` + `transform` | Impute 37 null `Review Rating` values with per-category median |
+| **Null Imputation** | `groupby` + `transform` | Fill 37 missing `Review Rating` values with per-category median |
 | **Column Standardisation** | `str.lower()` + `str.replace()` | Rename all columns to lowercase snake_case |
-| **Feature Engineering** | `pd.qcut()` + dict mapping | Create `age_group` (4 quartile bins) and `purchase_frequency_days` |
-| **Deduplication** | Boolean comparison | Confirmed `discount_applied == promo_code_used` (100% match); dropped `promo_code_used` |
-| **DB Export** | SQLAlchemy `df.to_sql()` | Uploaded 3,900 rows → `customer_behavior.public.customer` in PostgreSQL 18.6 |
-| **Visualization** | Power BI Desktop | KPI cards, donut chart, bar charts, interactive slicers |
+| **Feature Engineering** | `pd.qcut()` + dict mapping | Create `age_group` and `purchase_frequency_days` |
+| **Deduplication** | Boolean equality check | Confirmed `discount_applied == promo_code_used` (100%); dropped the latter |
+| **Database Export** | SQLAlchemy `df.to_sql()` | Upload 3,900 rows → `customer_behavior.public.customer` |
+| **Visualisation** | Power BI Desktop | KPI cards, donut chart, bar charts, interactive slicers |
 
 ---
 
-## 5. Code & Outputs
+## 6. Data Cleaning & Preprocessing
 
-### 5.1 Data Loading
+### 6.1 Data Loading
 
 ```python
 import pandas as pd
@@ -148,7 +179,7 @@ df = pd.read_csv('customer_shopping_behavior.csv')
 
 ---
 
-### 5.2 Data Preview — `df.head()`
+### 6.2 Data Preview — `df.head()`
 
 ```python
 df.head()
@@ -165,7 +196,7 @@ df.head()
 
 ---
 
-### 5.3 Dataset Info — `df.info()`
+### 6.3 Dataset Info — `df.info()`
 
 ```python
 df.info()
@@ -203,18 +234,18 @@ memory usage: 548.6 KB
 
 ---
 
-### 5.4 Summary Statistics — `df.describe()`
+### 6.4 Summary Statistics — `df.describe()`
 
 ```python
 df.describe(include='all')
 ```
 
-**Output (Numerical Columns):**
+**Numerical Columns:**
 
 | Statistic | Customer ID | Age | Purchase Amount (USD) | Review Rating | Previous Purchases |
-|-----------|------------|-----|-----------------------|---------------|--------------------|
+|-----------|------------|-----|----------------------|---------------|-------------------|
 | count | 3,900 | 3,900 | 3,900 | 3,863 | 3,900 |
-| mean | 1,950.50 | 44.07 | 59.76 | 3.75 | 25.35 |
+| mean | 1,950.50 | 44.07 | **59.76** | **3.75** | 25.35 |
 | std | 1,126.33 | 15.21 | 23.69 | 0.72 | 14.44 |
 | min | 1 | 18 | 20 | 2.50 | 1 |
 | 25% | 975.75 | 31 | 40 | 3.20 | 13 |
@@ -222,10 +253,10 @@ df.describe(include='all')
 | 75% | 2,925.25 | 57 | 81 | 4.30 | 38 |
 | max | 3,900 | 70 | 100 | 5.00 | 50 |
 
-**Output (Categorical Columns):**
+**Categorical Columns:**
 
 | Statistic | Gender | Item Purchased | Category | Location | Season | Subscription Status | Shipping Type |
-|-----------|--------|----------------|----------|----------|--------|--------------------|--------------:|
+|-----------|--------|---------------|----------|----------|--------|--------------------|--------------:|
 | count | 3,900 | 3,900 | 3,900 | 3,900 | 3,900 | 3,900 | 3,900 |
 | unique | 2 | 25 | 4 | 50 | 4 | 2 | 6 |
 | top | Male | Blouse | Clothing | Montana | Spring | No | Free Shipping |
@@ -233,7 +264,7 @@ df.describe(include='all')
 
 ---
 
-### 5.5 Missing Values Check
+### 6.5 Missing Values Check
 
 ```python
 df.isnull().sum()
@@ -241,53 +272,54 @@ df.isnull().sum()
 
 **Output:**
 
-| Column | Null Count |
-|--------|-----------|
-| Customer ID | 0 |
-| Age | 0 |
-| Gender | 0 |
-| Item Purchased | 0 |
-| Category | 0 |
-| Purchase Amount (USD) | 0 |
-| Location | 0 |
-| Size | 0 |
-| Color | 0 |
-| Season | 0 |
-| **Review Rating** | **37** ⚠️ |
-| Subscription Status | 0 |
-| Shipping Type | 0 |
-| Discount Applied | 0 |
-| Promo Code Used | 0 |
-| Previous Purchases | 0 |
-| Payment Method | 0 |
-| Frequency of Purchases | 0 |
+| Column | Null Count | Status |
+|--------|-----------|--------|
+| Customer ID | 0 | ✅ Clean |
+| Age | 0 | ✅ Clean |
+| Gender | 0 | ✅ Clean |
+| Item Purchased | 0 | ✅ Clean |
+| Category | 0 | ✅ Clean |
+| Purchase Amount (USD) | 0 | ✅ Clean |
+| Location | 0 | ✅ Clean |
+| Size | 0 | ✅ Clean |
+| Color | 0 | ✅ Clean |
+| Season | 0 | ✅ Clean |
+| **Review Rating** | **37** | ⚠️ Requires imputation |
+| Subscription Status | 0 | ✅ Clean |
+| Shipping Type | 0 | ✅ Clean |
+| Discount Applied | 0 | ✅ Clean |
+| Promo Code Used | 0 | ✅ Clean |
+| Previous Purchases | 0 | ✅ Clean |
+| Payment Method | 0 | ✅ Clean |
+| Frequency of Purchases | 0 | ✅ Clean |
 
 > [!NOTE]
-> Only `Review Rating` has missing values (37 nulls = ~0.95% of rows). These are imputed using the **per-category median** to preserve distribution integrity.
+> Only `Review Rating` contains null values — **37 records (~0.95% of rows)**. Per-category median imputation was chosen to preserve the natural rating distribution within each product category.
 
 ---
 
-### 5.6 Handling Missing Values
+### 6.6 Handling Missing Values
 
 ```python
+# Impute Review Rating nulls with the median per product category
 df['Review Rating'] = df.groupby('Category')['Review Rating'].transform(
     lambda x: x.fillna(x.median())
 )
 ```
 
-**Verification — `df.isnull().sum()` after imputation:**
+**Verification after imputation:**
 
-| Column | Null Count |
-|--------|-----------|
-| Review Rating | **0** ✅ |
-| All other columns | 0 ✅ |
+```python
+df.isnull().sum()
+# Review Rating    0   ✅ All nulls resolved
+```
 
 ---
 
-### 5.7 Column Cleaning
+### 6.7 Column Standardisation
 
 ```python
-# Standardise column names to lowercase snake_case
+# Convert all column names to lowercase snake_case
 df.columns = df.columns.str.lower()
 df.columns = df.columns.str.replace(' ', '_')
 df = df.rename(columns={'purchase_amount_(usd)': 'purchase_amount_usd'})
@@ -310,14 +342,18 @@ df = df.rename(columns={'purchase_amount_(usd)': 'purchase_amount_usd'})
 
 ---
 
-### 5.8 Feature Engineering — Age Group
+## 7. Feature Engineering
+
+### 7.1 Age Group Segmentation
+
+Customers were segmented into four age groups using **quartile-based binning** (`pd.qcut`) to ensure equal distribution across groups.
 
 ```python
 labels = ['Young Adult', 'Adult', 'Middle Aged', 'Senior']
 df['age_group'] = pd.qcut(df['age'], q=4, labels=labels)
 ```
 
-**Sample Output — `df[['age', 'age_group']].head(10)`:**
+**Sample output — `df[['age', 'age_group']].head(10)`:**
 
 | age | age_group |
 |-----|-----------|
@@ -332,7 +368,7 @@ df['age_group'] = pd.qcut(df['age'], q=4, labels=labels)
 | 26 | Young Adult |
 | 57 | Middle Aged |
 
-**Age Group Quartile Boundaries:**
+**Approximate quartile boundaries:**
 
 | Group | Approx. Age Range |
 |-------|------------------|
@@ -343,7 +379,9 @@ df['age_group'] = pd.qcut(df['age'], q=4, labels=labels)
 
 ---
 
-### 5.9 Feature Engineering — Purchase Frequency Days
+### 7.2 Purchase Frequency Days
+
+The `frequency_of_purchases` column contained string labels. These were mapped to integer values (number of days between purchases) to enable numeric analysis.
 
 ```python
 frequency_mapping = {
@@ -364,7 +402,7 @@ df['purchase_frequency_days'] = (
 )
 ```
 
-**Sample Output — `df[['frequency_of_purchases', 'purchase_frequency_days']].head(10)`:**
+**Sample output — `df[['frequency_of_purchases', 'purchase_frequency_days']].head(10)`:**
 
 | frequency_of_purchases | purchase_frequency_days |
 |------------------------|------------------------|
@@ -378,14 +416,14 @@ df['purchase_frequency_days'] = (
 
 ---
 
-### 5.10 Duplicate Column Detection & Drop
+### 7.3 Duplicate Column Detection & Drop
+
+Before finalising the dataset, `discount_applied` and `promo_code_used` were compared to check for redundancy.
 
 ```python
-# Check if discount_applied == promo_code_used for all rows
+# Visual inspection
 df[['discount_applied', 'promo_code_used']].head(10)
 ```
-
-**Output:**
 
 | discount_applied | promo_code_used |
 |-----------------|-----------------|
@@ -401,18 +439,20 @@ df[['discount_applied', 'promo_code_used']].head(10)
 | Yes | Yes |
 
 ```python
+# Programmatic confirmation across all 3,900 rows
 (df['discount_applied'] == df['promo_code_used']).all()
-# Output: True  (100% identical across all 3,900 rows)
+# Output: True
 
+# Drop the redundant column
 df = df.drop('promo_code_used', axis=1)
 ```
 
 > [!IMPORTANT]
-> `promo_code_used` and `discount_applied` are 100% identical across all rows. The redundant column was dropped, reducing the final column count from 20 → 19.
+> `promo_code_used` and `discount_applied` are **100% identical across all 3,900 rows**. The redundant column was dropped, keeping the final schema clean at **19 columns**.
 
 ---
 
-### 5.11 Final Column List
+### 7.4 Final Column List
 
 ```python
 df.columns
@@ -429,19 +469,22 @@ Index(['customer_id', 'age', 'gender', 'item_purchased', 'category',
       dtype='object')
 ```
 
-**Shape summary:**
+**Dataset transformation summary:**
 
 | Stage | Columns | Rows |
 |-------|---------|------|
-| Original raw CSV | 18 | 3,900 |
+| Raw CSV | 18 | 3,900 |
 | After dropping `promo_code_used` | 17 | 3,900 |
 | After adding `age_group` + `purchase_frequency_days` | **19** | **3,900** |
 
 ---
 
-### 5.12 Database Export — PostgreSQL
+## 8. PostgreSQL Database Integration
+
+The cleaned and engineered DataFrame was uploaded to a local PostgreSQL 18.6 database using SQLAlchemy and psycopg2.
 
 ```python
+# Install required libraries
 %pip install psycopg2-binary sqlalchemy
 # Successfully installed psycopg2-binary-2.9.13  sqlalchemy-2.1.4
 
@@ -455,8 +498,8 @@ engine = create_engine(
 with engine.connect() as connection:
     result = connection.execute(text("SELECT version();"))
     print(result.fetchone()[0])
-# → PostgreSQL 18.6 on x86_64-windows, compiled by msvc-19.44.35229, 64-bit
-# → Connection successful!
+# Output: PostgreSQL 18.6 on x86_64-windows, compiled by msvc-19.44.35229, 64-bit
+# Output: Connection successful!
 
 # Upload DataFrame to PostgreSQL
 df.to_sql(
@@ -467,10 +510,10 @@ df.to_sql(
     index=False
 )
 print("Customer data uploaded successfully!")
-# → Customer data uploaded successfully!
+# Output: Customer data uploaded successfully!
 ```
 
-**Database Configuration:**
+**Database configuration:**
 
 | Parameter | Value |
 |-----------|-------|
@@ -485,73 +528,67 @@ print("Customer data uploaded successfully!")
 
 ---
 
-## 6. Dashboard
+## 9. Power BI Dashboard
 
 **Tool:** Power BI Desktop | **Theme:** Purple / Dark Violet
 
-### 6.1 Full Overview — All Customers (No Filter)
+The dashboard provides an interactive, filterable view of all key metrics. Four slicers allow stakeholders to drill into any segment of the data in real time.
+
+### 9.1 Dashboard Screenshots
+
+**Overview — All 3,900 Customers (No Filter Applied)**
 
 ![Customer Behavior Dashboard - Overview](dashboard_overview.png)
 
-### 6.2 Filtered View — Male · No Subscription · Footwear · Free Shipping
+---
+
+**Filtered View — Male · No Subscription · Footwear · Free Shipping**
 
 ![Customer Behavior Dashboard - Filtered](dashboard_filtered.png)
 
 ---
 
-## 7. Dashboard Output Tables
+### 9.2 KPI Cards
 
-### 7.1 KPI Cards
-
-| KPI | Full Dataset | Filtered (Male, No Sub, Footwear, Free Ship) |
-|-----|-------------|----------------------------------------------|
+| KPI | Full Dataset (All Customers) | Filtered View (Male · No Sub · Footwear · Free Ship) |
+|-----|------------------------------|------------------------------------------------------|
 | 👥 Number of Customers | **4K** (3,900) | **43** |
 | 💰 Average Purchase Amount | **\$59.76** | **\$61.37** |
 | ⭐ Average Review Rating | **3.75** | **3.72** |
 
 ---
 
-### 7.2 Subscription Status Distribution
+### 9.3 Revenue & Sales by Category
 
-| Subscription Status | Customer Count | Percentage |
-|--------------------|---------------|-----------|
-| No | ~2,843 | **73%** |
-| Yes | ~1,057 | **27%** |
-| **Total** | **3,900** | **100%** |
+**Revenue by Category (Sum of `purchase_amount_usd`):**
 
-> Filtered view (Male, No Sub, Footwear): 100% No subscription (43 customers)
-
----
-
-### 7.3 Revenue by Category
-
-| Category | Total Revenue (USD) | % of Total |
-|----------|--------------------:|-----------|
+| Category | Total Revenue (USD) | Share of Total |
+|----------|--------------------:|----------------|
 | Clothing | ~\$100,000 | ~43% |
 | Accessories | ~\$70,000 | ~30% |
 | Footwear | ~\$45,000 | ~19% |
 | Outerwear | ~\$18,000 | ~8% |
 | **Total** | **~\$233,000** | **100%** |
 
-> Filtered view (Footwear only): ~\$2,640 total revenue from 43 customers
+> Filtered view (Footwear only): ~\$2,640 total revenue across 43 customers
 
----
+**Sales Volume by Category (Count of `customer_id`):**
 
-### 7.4 Sales Volume by Category
-
-| Category | Order Count | % of Total |
-|----------|------------:|-----------|
-| Clothing | ~1,700 | 43.6% |
-| Accessories | ~1,300 | 33.3% |
-| Footwear | ~500 | 12.8% |
-| Outerwear | ~200 | 5.1% |
+| Category | Order Count | Share of Total |
+|----------|------------:|----------------|
+| Clothing | ~1,700 | ~43.6% |
+| Accessories | ~1,300 | ~33.3% |
+| Footwear | ~500 | ~12.8% |
+| Outerwear | ~200 | ~5.1% |
 | **Total** | **~3,900** | **100%** |
 
 > Filtered view (Footwear only): 43 orders
 
 ---
 
-### 7.5 Revenue by Age Group
+### 9.4 Revenue & Sales by Age Group
+
+**Revenue by Age Group:**
 
 | Age Group | Total Revenue (USD) | Rank |
 |-----------|--------------------:|------|
@@ -560,11 +597,9 @@ print("Customer data uploaded successfully!")
 | Adult | ~\$57,000 | 🥉 3rd |
 | Senior | ~\$55,000 | 4th |
 
-> Filtered view (Male, No Sub, Footwear, Free Ship): Middle Aged leads at ~\$1,000
+> Filtered view (Male · No Sub · Footwear · Free Ship): Middle Aged leads at ~\$1,000
 
----
-
-### 7.6 Sales Volume by Age Group
+**Sales Volume by Age Group:**
 
 | Age Group | Order Count | Rank |
 |-----------|------------:|------|
@@ -573,11 +608,25 @@ print("Customer data uploaded successfully!")
 | Senior | ~700 | 🥉 3rd |
 | Adult | ~650 | 4th |
 
-> Filtered view (Male, No Sub, Footwear, Free Ship): Middle Aged (~17) → Adult (~14) → Young Adult (~9) → Senior (~5)
+> Filtered view (Male · No Sub · Footwear · Free Ship): Middle Aged (~17) → Adult (~14) → Young Adult (~9) → Senior (~5)
 
 ---
 
-### 7.7 Dashboard Slicers / Filters
+### 9.5 Subscription Distribution
+
+**% of Customers by Subscription Status (Donut Chart):**
+
+| Subscription Status | Customer Count | Percentage |
+|--------------------|---------------|-----------|
+| No (Non-Subscriber) | ~2,843 | **73%** |
+| Yes (Subscriber) | ~1,057 | **27%** |
+| **Total** | **3,900** | **100%** |
+
+> Filtered view (Male · No Sub · Footwear): 100% No subscription — 43 customers
+
+---
+
+### 9.6 Interactive Slicers
 
 | Slicer | Available Options |
 |--------|-----------------|
@@ -588,37 +637,37 @@ print("Customer data uploaded successfully!")
 
 ---
 
-### 7.8 Other Notable Metrics (from EDA)
+### 9.7 Other Notable EDA Metrics
 
 | Metric | Value |
 |--------|-------|
 | Top Payment Method | PayPal (677 customers) |
-| Most Common Shipping | Free Shipping (675 orders) |
+| Most Common Shipping Type | Free Shipping (675 orders) |
 | Most Purchased Item | Blouse (171 orders) |
-| Top State by Orders | Montana (96 orders) |
-| Most Common Season | Spring (999 orders) |
+| Top US State by Orders | Montana (96 orders) |
+| Most Common Purchase Season | Spring (999 orders) |
 | Gender Split | Male 68% · Female 32% |
 
 ---
 
-## 8. Key Insights
+## 10. Key Business Insights
 
-| # | Insight | Business Implication |
+| # | Finding | Business Implication |
 |---|---------|---------------------|
-| 1 | **73% of customers are non-subscribers** | Large untapped subscription growth opportunity |
-| 2 | **Clothing dominates revenue (~43%) and volume (~44%)** | Prioritize inventory & promotional spend in Clothing |
-| 3 | **Young Adults & Middle-Aged are top spenders** | Target marketing campaigns to the 18–57 age range |
-| 4 | **Average purchase amount is \$59.76** | Mid-range pricing is the sweet spot for this audience |
-| 5 | **Average review rating is 3.75 / 5** | Customer satisfaction programs have clear room to improve |
-| 6 | **Free Shipping is the most common shipping type** (675) | Free shipping is a primary purchase driver |
-| 7 | **PayPal is the top payment method** (677 users) | Optimize and prioritize the PayPal checkout experience |
-| 8 | **`discount_applied` = `promo_code_used` (100%)** | These are the same business lever — one metric suffices |
-| 9 | **Blouse is the most purchased item** (171 orders) | High-demand SKU; ensure consistent inventory availability |
-| 10 | **Montana leads all states in order volume** (96 orders) | Geographic concentration useful for logistics optimization |
+| 1 | **73% of customers are non-subscribers** | Significant untapped subscription growth opportunity — loyalty/reward campaigns warranted |
+| 2 | **Clothing dominates revenue (~43%) and sales volume (~44%)** | Prioritise inventory depth and promotional spend in the Clothing category |
+| 3 | **Young Adults and Middle-Aged customers are top spenders** | Focus marketing campaigns on the 18–57 age range for maximum ROI |
+| 4 | **Average purchase amount is \$59.76** | Mid-range pricing is the customer sweet spot — avoid heavy discounting above this threshold |
+| 5 | **Average review rating is 3.75 / 5** | Measurable gap from 5-star satisfaction — invest in post-purchase experience improvement |
+| 6 | **Free Shipping is the most common shipping choice** (675 orders) | Free shipping is a primary purchase driver — maintain or expand the offer |
+| 7 | **PayPal is the top payment method** (677 users) | Prioritise PayPal checkout optimisation and reduce friction at payment |
+| 8 | **`discount_applied` = `promo_code_used` (100% match)** | These are a single business lever — only one metric needs to be tracked |
+| 9 | **Blouse is the most purchased item** (171 orders) | High-demand SKU — ensure consistent stock availability and prominent placement |
+| 10 | **Montana leads all US states in order volume** (96 orders) | Geographic concentration presents logistics optimisation and regional marketing opportunities |
 
 ---
 
-## 9. Pipeline Architecture
+## 11. Pipeline Architecture
 
 ```mermaid
 flowchart LR
@@ -631,20 +680,107 @@ flowchart LR
 
 ---
 
-## 📁 Repository Structure
+## 12. Project Structure
 
 ```
-Customer Behavior Analysis/
-├── customer_shopping_behavior.csv              # Raw source dataset
-├── customer_shopping_behaviour_analysis.ipynb  # Jupyter analysis notebook
-├── dashboard_overview.png                      # Power BI dashboard (full view)
-├── dashboard_filtered.png                      # Power BI dashboard (filtered view)
-└── README.md                                   # This documentation
+CustomerPulse-Analytics/
+├── customer_shopping_behavior.csv               # Raw source dataset (3,900 rows × 18 cols)
+├── customer_shopping_behaviour_analysis.ipynb   # Jupyter notebook — full analysis pipeline
+├── dashboard_overview.png                       # Power BI screenshot — all customers
+├── dashboard_filtered.png                       # Power BI screenshot — filtered segment
+└── README.md                                    # Project documentation (this file)
 ```
 
 ---
 
+## 13. Installation & Setup
+
+### Prerequisites
+
+- Python 3.10+ (project uses 3.13)
+- PostgreSQL 18.x installed and running locally
+- Power BI Desktop (Windows only) — for viewing the dashboard
+- Jupyter Notebook or JupyterLab
+
+### Python Dependencies
+
+```bash
+pip install pandas psycopg2-binary sqlalchemy
+```
+
+### PostgreSQL Setup
+
+1. Create a new database named `customer_behavior`:
+
+```sql
+CREATE DATABASE customer_behavior;
+```
+
+2. Ensure a `public` schema exists (it is created by default in PostgreSQL).
+
+3. Update the connection string in the notebook with your credentials:
+
+```python
+engine = create_engine(
+    "postgresql+psycopg2://<username>:<password>@localhost:5432/customer_behavior"
+)
+```
+
+---
+
+## 14. How to Run the Project
+
+1. **Clone or download** this repository to your local machine.
+
+2. **Place the dataset** `customer_shopping_behavior.csv` in the same directory as the notebook.
+
+3. **Launch Jupyter Notebook:**
+
+```bash
+jupyter notebook customer_shopping_behaviour_analysis.ipynb
+```
+
+4. **Run all cells in order.** The notebook will:
+   - Load and explore the raw data
+   - Clean and impute missing values
+   - Standardise column names
+   - Engineer `age_group` and `purchase_frequency_days` features
+   - Export the final DataFrame to PostgreSQL
+
+5. **Open Power BI Desktop** and connect to the `customer_behavior` PostgreSQL database to explore the dashboard.
+
+> [!NOTE]
+> Ensure your PostgreSQL server is running before executing the database export cells. Update the connection password before running.
+
+---
+
+## 15. Conclusion
+
+This project demonstrates a complete, production-style data analytics workflow — from raw CSV ingestion to a polished, interactive business dashboard. Key outcomes include a clean, documented dataset ready for querying in PostgreSQL, actionable segmentation of 3,900 customers by age group and subscription status, and a Power BI dashboard that allows business stakeholders to filter and explore revenue and sales metrics across multiple dimensions.
+
+The analysis reveals that **Clothing and the Young Adult / Middle-Aged segments drive the most value**, that **73% of customers are non-subscribers** (a major growth lever), and that **Free Shipping and PayPal are the dominant fulfilment and payment preferences**.
+
+---
+
+## 16. Future Improvements
+
+| # | Improvement | Description |
+|---|-------------|-------------|
+| 1 | **Customer Lifetime Value (CLV) modelling** | Use `previous_purchases` and `purchase_frequency_days` to estimate long-term customer value |
+| 2 | **Churn prediction** | Build a classification model to predict subscription cancellations |
+| 3 | **Geographic visualisation** | Map order volume and revenue by US state using Folium or Power BI Maps |
+| 4 | **RFM segmentation** | Apply Recency–Frequency–Monetary analysis for advanced customer segmentation |
+| 5 | **Automated pipeline** | Schedule data refresh with Apache Airflow or a cron job |
+| 6 | **A/B test simulation** | Simulate discount vs. non-discount impact on purchase amounts |
+| 7 | **Seasonal trend analysis** | Model revenue patterns across Spring, Summer, Fall, and Winter |
+
+---
+
 <div align="center">
+
+---
+
+*CustomerPulse Analytics · Data Analytics Portfolio Project*
 
 *Documentation generated: October 30, 2026*
 
